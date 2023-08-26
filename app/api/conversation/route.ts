@@ -5,7 +5,7 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-console.log(configuration);
+// console.log(configuration);
 
 const openai = new OpenAIApi(configuration);
 
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       return new NextResponse("Messages are required", { status: 400 });
     }
 
-    console.log("Reached response");
+    // console.log("Reached response");
     //  interact with openai for responses
 
     const response = await openai.createChatCompletion({
