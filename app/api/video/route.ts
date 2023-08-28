@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
 
+import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
+
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN!,
 });
@@ -25,6 +27,12 @@ export async function POST(req: Request) {
       return new NextResponse("Prompt is required", { status: 400 });
     }
 
+    const freeTrial = await checkApiLimit();
+
+    if (!freeTrial) {
+      return new NextResponse("Free trial has expired.", { status: 403 });
+    }
+
     // console.log("Reached response");
     //  interact with openai for responses
 
@@ -36,6 +44,8 @@ export async function POST(req: Request) {
         },
       }
     );
+
+    await incrementApiLimit();
 
     return NextResponse.json(response);
   } catch (error) {
