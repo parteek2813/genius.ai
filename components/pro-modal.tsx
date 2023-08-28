@@ -1,5 +1,20 @@
 "use client";
 
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
+
 export const ProModal = () => {
-  return <div>Pro Modal</div>;
+  return (
+    <>
+      <Dialog open>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
+              Upgrade to Genius
+            </DialogTitle>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 };
