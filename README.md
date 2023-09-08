@@ -85,4 +85,4 @@ Contributions are welcome! If you would like to contribute to this project, plea
 
 ## Contact
 
-If you have any questions, suggestions, or issues, please feel free to contact with me at Dawitlior777@gmail.com
+If you have any questions, suggestions, or issues, please feel free to contact with me at digitalparteek@gmail.com
