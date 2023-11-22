@@ -42,17 +42,21 @@ export async function POST(req: Request) {
     if (!freeTrial && !isPro) {
       return new NextResponse("Free trial has expired.", { status: 403 });
     }
-    // console.log("Reached response");
+    console.log("Reached response");
     //  interact with openai for responses
 
+    console.log(messages);
+
     const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
       messages,
+      model: "gpt-3.5-turbo",
     });
 
     if (!isPro) {
       await incrementApiLimit();
     }
+
+    console.log(response.data.choices[0].message);
 
     return NextResponse.json(response.data.choices[0].message);
   } catch (error) {

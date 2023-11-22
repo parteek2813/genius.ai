@@ -1,12 +1,17 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
+import Replicate from "replicate";
 
 import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
+});
+
+const replicate = new Replicate({
+  auth: process.env.REPLICATE_API_TOKEN!,
 });
 // console.log(configuration);
 
@@ -55,19 +60,30 @@ export async function POST(req: Request) {
     console.log("Reached response");
     //  interact with openai for responses
 
-    const response = await openai.createImage({
-      prompt,
-      n: parseInt(amount),
-      size: resolution,
-    });
+    // const response = await openai.createImage({
+    //   prompt,
+    //   n: parseInt(amount),
+    //   size: resolution,
+    // });
+
+    // console.log(response);
+
+    const output = await replicate.run(
+      "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
+      {
+        input: {
+          prompt: "a vision of paradise. unreal engine",
+        },
+      }
+    );
 
     if (!isPro) {
       await incrementApiLimit();
     }
-    // const image_url = response.data.data[0].url;
-    // console.log(image_url);
+    const image_url = output;
+    console.log(image_url);
 
-    return NextResponse.json(response.data.data);
+    return NextResponse.json(image_url);
   } catch (error) {
     console.log("[IMAGE_ERROR]", error);
     return new NextResponse("Internal Server Error [route.ts:44]", {

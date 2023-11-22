@@ -34,7 +34,7 @@ import { toast } from "react-hot-toast";
 const ImagePage = () => {
   const proModal = useProModal();
   const router = useRouter();
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,14 +49,15 @@ const ImagePage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setImages([]);
+      setImages("");
 
       const response = await axios.post("/api/image", values);
 
       // extract url from each individual image from the array and set that
-      const urls = response.data.map((image: { url: string }) => image.url);
+      // const urls = response;
+      console.log(response.data[0]);
 
-      setImages(urls);
+      setImages(response.data[0]);
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
@@ -187,23 +188,23 @@ const ImagePage = () => {
             <Empty label="No images generated." />
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
-            {images.map((src) => (
-              <Card key={src} className="rounded-lg overflow-hidden">
-                <div className="relative aspect-square ">
-                  <Image alt="Image" fill src={src} />
-                </div>
-                <CardFooter className="p-2 ">
-                  <Button
-                    onClick={() => window.open(src)}
-                    variant="secondary"
-                    className="w-full"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+            {/* {images.map((src) => ( */}
+            <Card key={images} className="rounded-lg overflow-hidden">
+              <div className="relative aspect-square ">
+                <Image alt="Image" fill src={images} />
+              </div>
+              <CardFooter className="p-2 ">
+                <Button
+                  onClick={() => window.open(images)}
+                  variant="secondary"
+                  className="w-full"
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download
+                </Button>
+              </CardFooter>
+            </Card>
+            {/* // ))} */}
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ const configuration = new Configuration({
 // console.log(configuration);
 
 const openai = new OpenAIApi(configuration);
+console.log(openai);
+console.log(configuration);
 
 const instructionMessage: ChatCompletionRequestMessage = {
   role: "system",
@@ -49,13 +51,15 @@ export async function POST(req: Request) {
       return new NextResponse("Free trial has expired.", { status: 403 });
     }
 
-    // console.log("Reached response");
+    console.log("Reached response");
     //  interact with openai for responses
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [instructionMessage, ...messages],
     });
+
+    console.log(response);
 
     if (!isPro) {
       await incrementApiLimit();
