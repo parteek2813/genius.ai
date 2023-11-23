@@ -13,13 +13,13 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 const tools = [
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-    href: "/conversation",
-  },
+  // {
+  //   label: "Conversation",
+  //   icon: MessageSquare,
+  //   color: "text-violet-500",
+  //   bgColor: "bg-violet-500/10",
+  //   href: "/conversation",
+  // },
   {
     label: "Music Generation",
     icon: Music,
@@ -41,13 +41,13 @@ const tools = [
     bgColor: "bg-orange-700/10",
     href: "/video",
   },
-  {
-    label: "Code Generation",
-    icon: Code,
-    color: "text-green-700",
-    bgColor: "bg-green-700/10",
-    href: "/code",
-  },
+  // {
+  //   label: "Code Generation",
+  //   icon: Code,
+  //   color: "text-green-700",
+  //   bgColor: "bg-green-700/10",
+  //   href: "/code",
+  // },
 ];
 
 const DashboardPage = () => {

@@ -27,12 +27,12 @@ const routes = [
     href: "/dashboard",
     color: "text-sky-500",
   },
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    href: "/conversation",
-    color: "text-violet-500",
-  },
+  // {
+  //   label: "Conversation",
+  //   icon: MessageSquare,
+  //   href: "/conversation",
+  //   color: "text-violet-500",
+  // },
   {
     label: "Image Generation",
     icon: ImageIcon,
@@ -51,12 +51,12 @@ const routes = [
     color: "text-emerald-500",
     href: "/music",
   },
-  {
-    label: "Code Generation",
-    icon: Code,
-    color: "text-green-700",
-    href: "/code",
-  },
+  // {
+  //   label: "Code Generation",
+  //   icon: Code,
+  //   color: "text-green-700",
+  //   href: "/code",
+  // },
   {
     label: "Settings",
     icon: Settings,
